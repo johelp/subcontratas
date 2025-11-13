@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # 1. SERVICIO DE BASE DE DATOS
+  db:
+    image: mariadb:latest 
+    container_name: mysql-db
+    restart: unless-stopped
+    environment:
+      # Credenciales para tu aplicación PHP
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: snow_subcontratas # <--- Tu nombre de BD
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  # 2. SERVICIO DE APLICACIÓN (PHP y Web Server)
+  app:
+    image: mcr.microsoft.com/devcontainers/universal:latest
+    container_name: php-app
+    volumes:
+      - ..:/workspaces:cached
+      
+    ports:
+      - 8080:80 # Mapea el puerto del navegador al puerto web interno
+      
+    depends_on:
+      - db
+      
+    # Comando de inicio: Inicia Apache y mantiene el contenedor corriendo
+    command: /bin/bash -c "sudo service apache2 start && /bin/bash"
+
+volumes:
+  dbdata:
