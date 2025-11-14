@@ -1,6 +1,5 @@
 {
   "name": "PHP & MySQL Dev Container (Subcontratas)",
-  
   "dockerComposeFile": "docker-compose.yml",
   "service": "app", 
   "workspaceFolder": "/workspaces", 
@@ -8,18 +7,12 @@
   "forwardPorts": [8080, 3306],
 
   "customizations": {
-    "vscode": {
-      "extensions": [
-        "bmewburn.vscode-intelephense-client",
-        "ms-azuretools.vscode-docker",
-        "formulahendry.vscode-mysql"
-      ]
-    }
+    // ... extensiones ...
   },
   
-  // Instala PHP, Apache y el módulo MySQL
-  "postCreateCommand": "sudo apt update && sudo apt install -y apache2 php libapache2-mod-php php-mysql && sudo a2enmod php && sudo service apache2 restart",
+  // Instalación de paquetes y configuración de Apache
+  "postCreateCommand": "sudo apt update && sudo apt install -y apache2 php libapache2-mod-php php-mysql -y && chmod +x .devcontainer/apache-config.sh && .devcontainer/apache-config.sh",
 
-  // Ejecuta el script de configuración de la BD
+  // Inicialización de DB
   "initializeCommand": "chmod +x .devcontainer/setup.sh && .devcontainer/setup.sh" 
 }
