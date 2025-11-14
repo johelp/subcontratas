@@ -4,7 +4,7 @@
 
 DB_NAME="snow_subcontratas"
 DB_ROOT_PASS="root"
-SQL_FILE="/workspaces/dump.sql" # Ubicación del archivo SQL en el Codespace
+SQL_FILE="/workspaces/subcontratas/dump.sql" # Ubicación del archivo SQL en el Codespace
 
 echo "Iniciando la configuración del entorno para $DB_NAME..."
 
